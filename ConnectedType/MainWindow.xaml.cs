@@ -30,6 +30,7 @@ namespace ConnectedType
 
         private void ButtonDownload_Click(object sender, RoutedEventArgs e)
         {
+        
             try
             {
                 SqlConnection con = new SqlConnection(_connectionString);
@@ -41,14 +42,14 @@ namespace ConnectedType
                     con.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     List<Equipments> equipmentses = new List<Equipments>();
-
+                    
                     while (reader.Read())
                     {
                        Equipments eq = new Equipments();
                         eq.EquipmentId = Int32.Parse(reader[0].ToString());
                         eq.GarageRoom = reader[1].ToString();
                         eq.SerialNo = reader[6].ToString();
-                        eq.ManufYear = reader[6].ToString();
+                        eq.ManufYear = reader[4].ToString();
                         equipmentses.Add(eq);
                     }
 
@@ -75,6 +76,8 @@ namespace ConnectedType
 
         }
 
+
+    
         private void ListViewConnected_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Equipments eq = ListViewConnected.SelectedItem as Equipments;
@@ -84,6 +87,19 @@ namespace ConnectedType
             TextBoxManuYear.Text = eq.ManufYear;
         }
 
-     
+
+        private void ButtonSaveChanges_OnClick(object sender, RoutedEventArgs e)
+        {
+            Equipments eq2 = ListViewConnected.SelectedItem as Equipments;
+            SqlConnection con = new SqlConnection(_connectionString);
+            string sqlExpression = "UPDATE newEquipment SET strManufYear="+TextBoxManuYear.Text+ ", intGarageRoom=" + TextBoxGarageRoom.Text+  " WHERE intEquipmentID='"+eq2.EquipmentId+"'";
+            using (con)
+            {
+                con.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, con);
+                int number = command.ExecuteNonQuery();
+                MessageBox.Show("Обновлено объектов 1");
+            }
+        }
     }
 }
