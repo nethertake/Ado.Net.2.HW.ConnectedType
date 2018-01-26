@@ -19,17 +19,41 @@
         </Grid.RowDefinitions>
         <Button x:Name="ButtonDownload" Height="20" Width="150" Content="Выгрузить" Click="ButtonDownload_Click"></Button>
         <Button Grid.Row="0" Grid.Column="1" x:Name="ButtonSaveChanges" Height="20" Width="150" Content="Сохранить изменения" Click="ButtonDownload_Click"></Button>
-        <ListView x:Name="ListViewConnected" Grid.Row="1" Grid.RowSpan="3">
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical">
+            <WrapPanel Margin="5" >
+                <Label >Equipment Id:</Label>
+                <TextBox Text="{Binding Path=EquipmentId}" Width="200" x:Name="TextBoxEquipmentId" ></TextBox>
+            </WrapPanel>
+
+            <WrapPanel Margin="5" >
+                <Label >Garage Room:</Label>
+                <TextBox Width="200" x:Name="TextBoxGarageRoom"></TextBox>
+            </WrapPanel>
+
+            <WrapPanel Margin="5" >
+                <Label >Serial Number:</Label>
+                <TextBox Width="200" x:Name="TextBoxSerialNo"></TextBox>
+            </WrapPanel>
+
+            <WrapPanel Margin="5" >
+                <Label >Manufacturer Year:</Label>
+                <TextBox Width="150" x:Name="TextBoxManuYear"></TextBox>
+            </WrapPanel>
+        </StackPanel>
+      
+       
+        <ListView x:Name="ListViewConnected" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" SelectionChanged="ListViewConnected_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path =  }"></GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path =  }"></GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path =  }"></GridViewColumn>
+                        <GridViewColumn  Header="Equipment Id" DisplayMemberBinding="{Binding Path = EquipmentId}"></GridViewColumn>
+                        <GridViewColumn Header="GarageRoom" DisplayMemberBinding="{Binding Path = GarageRoom }"></GridViewColumn>
+                        <GridViewColumn Width="80" Header="SerialNo" DisplayMemberBinding="{Binding Path = SerialNo }"></GridViewColumn>
+                        <GridViewColumn Width="70" Header="ManufYear" DisplayMemberBinding="{Binding Path = ManufYear }"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
-    
+   
     </Grid>
 </Window>
