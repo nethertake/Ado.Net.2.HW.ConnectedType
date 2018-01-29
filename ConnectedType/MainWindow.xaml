@@ -18,7 +18,11 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="ButtonDownload" Height="20" Width="150" Content="Выгрузить" Click="ButtonDownload_Click"></Button>
-        <Button Grid.Row="0" Grid.Column="1" x:Name="ButtonSaveChanges" Height="20" Width="150" Content="Сохранить изменения" Click="ButtonSaveChanges_OnClick"></Button>
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Button Margin="10"  x:Name="ButtonSaveChanges" Height="20" Width="150" Content="Сохранить изменения" Click="ButtonSaveChanges_OnClick"></Button>
+            <Button Margin="10" x:Name ="ButtonReports" Click="ButtonReports_OnClick">Отчёты</Button>
+        </WrapPanel>
+        
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical">
             <WrapPanel Margin="5" >
                 <Label >Equipment Id:</Label>
@@ -42,13 +46,13 @@
         </StackPanel>
       
        
-        <ListView x:Name="ListViewConnected" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" SelectionChanged="ListViewConnected_SelectionChanged">
+        <ListView Margin="5" x:Name="ListViewConnected" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" SelectionChanged="ListViewConnected_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn  Header="Equipment Id" DisplayMemberBinding="{Binding Path = EquipmentId}"></GridViewColumn>
                         <GridViewColumn Header="GarageRoom" DisplayMemberBinding="{Binding Path = GarageRoom }"></GridViewColumn>
-                        <GridViewColumn Width="80" Header="SerialNo" DisplayMemberBinding="{Binding Path = SerialNo }"></GridViewColumn>
+                        <GridViewColumn Width="70" Header="SerialNo" DisplayMemberBinding="{Binding Path = SerialNo }"></GridViewColumn>
                         <GridViewColumn Width="70" Header="ManufYear" DisplayMemberBinding="{Binding Path = ManufYear }"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>

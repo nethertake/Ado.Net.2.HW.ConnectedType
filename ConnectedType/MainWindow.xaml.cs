@@ -62,7 +62,7 @@ namespace ConnectedType
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+               
             }
         }
 
@@ -90,16 +90,31 @@ namespace ConnectedType
 
         private void ButtonSaveChanges_OnClick(object sender, RoutedEventArgs e)
         {
-            Equipments eq2 = ListViewConnected.SelectedItem as Equipments;
-            SqlConnection con = new SqlConnection(_connectionString);
-            string sqlExpression = "UPDATE newEquipment SET strManufYear="+TextBoxManuYear.Text+ ", intGarageRoom=" + TextBoxGarageRoom.Text+  " WHERE intEquipmentID='"+eq2.EquipmentId+"'";
-            using (con)
+            try
             {
-                con.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, con);
-                int number = command.ExecuteNonQuery();
-                MessageBox.Show("Обновлено объектов 1");
+                Equipments eq2 = ListViewConnected.SelectedItem as Equipments;
+                SqlConnection con = new SqlConnection(_connectionString);
+                string sqlExpression = "UPDATE newEquipment SET strManufYear=" + TextBoxManuYear.Text +
+                                       ", intGarageRoom=" + TextBoxGarageRoom.Text + ", strSerialNo ='" + TextBoxSerialNo.Text +  "' WHERE intEquipmentID=" +
+                                       eq2.EquipmentId + "";
+                using (con)
+                {
+                    con.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression, con);
+                    int number = command.ExecuteNonQuery();
+                    MessageBox.Show("Обновлено объектов" + number);
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void ButtonReports_OnClick(object sender, RoutedEventArgs e)
+        {
+            Reports rp = new Reports();
+            rp.Show();
         }
     }
 }
